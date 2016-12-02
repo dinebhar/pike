@@ -419,8 +419,7 @@ class PollPoller(BasePoller):
                 writables.append(fd)
                 self.p.modify(fd, select.POLLIN | select.POLLERR)
             elif event == select.POLLERR:
-                t = self.connections[fd]
-                t.handle_error()
+                writables.append(fd)
         self.process_readables(readables)
         self.process_writables(writables)
 
